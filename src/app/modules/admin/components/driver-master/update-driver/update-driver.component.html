@@ -1,0 +1,70 @@
+
+<div class="container mt-5 justify-content-center align-item-center d-flex">
+    <div  style="width: 350px; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);">
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" class="wrapper" style="background-color: #555454a2;" novalidate>
+            <h4 for="fname" style="font-size: 20px;" class="text-center text-white">Update Driver</h4>
+            <hr>
+            
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputPassword4" class="text-white">First name :</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname"  #firstname="ngModel" [(ngModel)]="driver.firstname"  required pattern="[a-zA-Z][a-zA-Z ]+">
+                    <div *ngIf="f.submitted && firstname.invalid" class="text-danger" style="font-size: 14px;">
+                        <div *ngIf="firstname.errors?.required">First name is required</div>
+                        <div *ngIf="firstname.errors?.pattern">First name is invalid</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputAddress" class="text-white">Last name :</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" #lastname="ngModel" [(ngModel)]="driver.lastname"  required pattern="[a-zA-Z][a-zA-Z ]+">
+                    <div *ngIf="f.submitted && lastname.invalid" class="text-danger" style="font-size: 14px;">
+                        <div *ngIf="lastname.errors?.required">Last name is required</div>
+                        <div *ngIf="lastname.errors?.pattern">Last name is invalid</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputState">Vehicle Type :</label>
+                    <select id="inputState" class="form-control" formControlName="vehicleType">
+                        <option selected></option>
+                        <option>Two Wheeler</option>
+                        <option>Three Wheeler</option>
+                        <option>Four Wheeler</option>
+                    </select>
+                </div>
+            </div> -->
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputCity" class="text-white">License no :</label>
+                    <input type="text" class="form-control" id="licenseNumber" name="licenseNumber" #licenseNumber="ngModel" [(ngModel)]="driver.licenseNumber"  required pattern="^[A-Z](?:\d[- ]*){14}$">
+                    <div *ngIf="f.submitted && licenseNumber.invalid" class="text-danger" style="font-size: 14px;">
+                        <div *ngIf="licenseNumber.errors?.required">License number is required</div>
+                        <div *ngIf="licenseNumber.errors?.pattern">License number is invalid</div>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputZip" class="text-white">Phone no :</label>
+                    <input type="number" class="form-control" id="phoneNumber" name="phoneNumber" #phoneNumber="ngModel" [(ngModel)]="driver.phoneNumber" required pattern="^((\\+91-?)|0)?[0-9]{10}$">
+                    <div *ngIf="f.submitted && phoneNumber.invalid" class="text-danger" style="font-size: 14px;">
+                        <div *ngIf="phoneNumber.errors?.required">Phone number is required</div>
+                        <div *ngIf="phoneNumber.errors?.pattern">Phone number is invalid</div>
+                    </div> 
+                </div>
+            </div>
+
+            <button type="submit"  class="btn btn-primary"
+                style="width: 48%; font-size: 14px;">Update</button>
+            <button type="button"  class="btn btn-primary ml-2"
+                style="width: 49%; font-size: 14px;" [routerLink]="['/driver-list']" routerLinkActive="router-link-active"  >Back</button>
+        </form>
+    </div>
+</div>

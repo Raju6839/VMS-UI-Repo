@@ -1,0 +1,29 @@
+   <!-- <app-side-bar></app-side-bar> -->
+<div class="wrapper">
+  <h6 style="color: white; font-style: italic;">Vehicle Management System</h6>
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        
+      <p class="title">Log in</p>
+
+      <div class="text-danger text-center alert alert-danger" *ngIf="isErrorMsg">{{userError}}</div>
+
+      <input type="text" placeholder="Username" id="username" formControlName="username" />
+      <i class="fa fa-user"></i>
+      <div *ngIf="submitted && f.username.errors" class="text-danger mb-2" style="font-size: 14px;">
+        <div *ngIf="f.username.errors.required">Username is required.</div>
+      </div>
+  
+      <input type="password" placeholder="Password" id="password" formControlName="password" />
+      <i class="fa fa-key"></i>
+      <div *ngIf="submitted && f.password.errors" class="text-danger mb-2" style="font-size: 14px;">
+        <div *ngIf="f.password.errors.required">Password is required.</div>
+      </div>
+  
+      <button>
+        <span class="state font-weight-bold">Log in</span>
+      </button>
+      <div class="sign-up">
+        <span style="font-size: 13px;">Not Registered?</span><a [routerLink]="['/sign-up']" routerLinkActive="router-link-active" ><strong class="ml-1">Create an account</strong></a>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,48 @@
+
+<div class="wrapper">
+    <form class="login" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      
+      <p class="title">Sign up</p>
+
+      <div class="text-danger text-center alert alert-danger" *ngIf="isErrorMsg">{{userError}}</div>
+  
+      <input type="text" placeholder="Firstname" id="firstname" formControlName="firstname" />
+      <i class="fa fa-user"></i>
+      <div *ngIf="submitted && f.firstname.errors" class="text-danger mb-2" style="font-size: 14px;">
+        <div *ngIf="f.firstname.errors.required">First name is required.</div>
+      </div>
+  
+      <input type="text" placeholder="Lastname" id="lastname" formControlName="lastname" />
+      <i class="fa fa-user"></i>
+      <div *ngIf="submitted && f.lastname.errors" class="text-danger mb-2" style="font-size: 14px;">
+        <div *ngIf="f.lastname.errors.required">Last name is required.</div>
+      </div>
+  
+      <input type="text" placeholder="Email" id="email" formControlName="email" />
+      <i class="fa fa-user"></i>
+      <div *ngIf="submitted && f.email.errors" class="text-danger mb-2" style="font-size: 14px;">
+        <div *ngIf="f.email.errors.required">Email is required.</div>
+      </div>
+  
+      <input type="text" placeholder="Username" id="username" formControlName="username" />
+      <i class="fa fa-user"></i>
+      <div *ngIf="submitted && f.username.errors" class="text-danger mb-2" style="font-size: 14px;">
+        <div *ngIf="f.username.errors.required">User name is required.</div>
+        <div *ngIf="f.username.errors.pattern">User name is invalid.</div>
+      </div>
+  
+      <input type="password" placeholder="Password" id="password" formControlName="password" />
+      <i class="fa fa-key"></i>
+      <div *ngIf="submitted && f.password.errors" class="text-danger mb-2" style="font-size: 14px;">
+        <div *ngIf="f.password.errors.required">Password is required.</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters.</div>
+        <div *ngIf="f.password.errors.pattern">Password is invalid.</div>
+      </div>
+      <div class="sign-up">
+        <span style="font-size: 13px;">Have already an account?</span><a [routerLink]="['/']" routerLinkActive="router-link-active" ><strong class="ml-1">Login here</strong></a>
+      </div>
+      <button type="submit">
+        <span class="state font-weight-bold" routerLinkActive="router-link-active"  >Sign up</span>
+      </button>
+    </form>
+  </div>

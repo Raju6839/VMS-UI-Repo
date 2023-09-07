@@ -1,0 +1,219 @@
+<!-- <app-side-bar></app-side-bar> -->
+<app-full-nav-bar></app-full-nav-bar>
+<div class="mt-1 wrap" style="background-color: #4a4848a2;">
+  <div class="panel panel-primary"
+    style="padding: 20px; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);">
+    <div class="panel-heading">
+      <h4 style="font-style: italic;" class="text-center text-white">Vehicle Master List</h4>
+      <hr>
+    </div>
+
+    <div class="form-group form-inline">
+      <input type="text" class="form-control ml-2" placeholder="Search on vehicle number" style="width: 212px;" (input)="onInputClearText(txt)" #txt>
+      <button class="search-button btn btn-success ml-2" (click)="onSearch(txt)" [disabled]="txt.value ==''">Search</button>
+    </div>
+    <div class="panel-body main">
+      <table class="table table-striped table-bordered">
+        <thead class="text-white">
+          <tr>
+            <th>Sr No.</th>
+            <th>Vehicle Number</th>
+            <th>Owner Name</th>
+            <th>Vehicle Type</th>
+            <th>Color</th>
+            <th>Model</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody class="text-white">
+          <tr *ngFor="let row of vehicles | paginate: config; let i = index" [class.active]="i== currentSelectedPage"
+            (click)="setActive(i)">
+            <td>{{row.id}}
+            <td>{{row.plateNumber}}</td>
+            <td>{{row.ownerName}}</td>
+            <td>{{row.vehicleType}}</td>
+            <td>{{row.color}}</td>
+            <td>{{row.model}}</td>
+            <td data-toggle="modal" (click)="onEdit(row)" data-target="#exampleModal">
+              <a><i class="fa fa-pencil-square-o" aria-hidden="true" style="padding-left: 20px"></i></a>
+            </td>
+            <td (click)="deleteVehicle(row.id)">
+              <a><i class="fa fa-trash" aria-hidden="true" style="padding-left: 20px"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary mt-1" type="submit" (click)="clickAddVehicle()" data-toggle="modal"
+          data-target="#exampleModal">Register New
+          Vehicle</button>
+
+      <div class="col-12 d-flex justify-content-around justify-space-between">
+        <div class="">
+          <pagination-controls id="vehiclePaginator" previousLabel="Prev" nextLabel="Next"
+            (pageChange)="pageChanged($event)">
+          </pagination-controls>
+        </div>
+        <div class="">
+          <label class="justify-content-end text-white" for="items">Total records : {{totalRecords}}</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- <div class="">
+  <label for="items" class="text-right mr-2">Records per page:</label>
+  <select class= "paginationDropDown" (click)="dropDownRecords($event.target.value)">
+  <option value="5" [selected] = true>5</option>
+  <option value="10">10</option>
+  <option value="15">15</option>
+  <option value="20">20</option>
+  <option value="25">25</option>
+  </select>  
+</div> -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" style="max-width:350px; max-height:1000px;" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="font-style: italic;">Vehicle Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="vehicleForm">
+
+          <div class="form-group">
+            <label for="inputPassword4" style="font-size: 14px;">Plate No :</label>
+            <input type="text" class="form-control" id="vehicleNumber" formControlName="plateNumber">
+            <div *ngIf="submitted && f.plateNumber.errors" class="text-danger" style="font-size: 14px;">
+              <div *ngIf="f.plateNumber.errors.required">Plate number is required.</div>
+              <div *ngIf="f.plateNumber.errors.pattern">Plate number is invalid.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputAddress" style="font-size: 14px;">Owner Name :</label>
+            <input type="text" class="form-control" id="ownerName" formControlName="ownerName">
+            <div *ngIf="submitted && f.ownerName.errors" class="text-danger" style="font-size: 14px;">
+              <div *ngIf="f.ownerName.errors.required">Owner name is required.</div>
+              <div *ngIf="f.ownerName.errors.pattern">Owner name is invalid</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputState" style="font-size: 14px;">Vehicle Type :</label>
+            <select id="inputState" class="form-control" formControlName="vehicleType">
+              <option selected></option>
+              <option>Two Wheeler</option>
+              <option>Three Wheeler</option>
+              <option>Four Wheeler</option>
+            </select>
+            <div *ngIf="submitted && f.vehicleType.errors" class="text-danger" style="font-size: 14px;">
+              <div *ngIf="f.vehicleType.errors.required">Vehicle type is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputCity" style="font-size: 14px;">Color :</label>
+            <input type="text" class="form-control" id="color" formControlName="color">
+            <div *ngIf="submitted && f.color.errors" class="text-danger" style="font-size: 14px;">
+              <div *ngIf="f.color.errors.required">Color is required.</div>
+              <div *ngIf="f.color.errors.pattern">Color is invalid.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="inputZip" style="font-size: 14px;">Model :</label>
+            <input type="text" class="form-control" id="model" formControlName="model">
+            <div *ngIf="submitted && f.model.errors" class="text-danger" style="font-size: 14px;">
+              <div *ngIf="f.model.errors.required">Model is required.</div>
+              <div *ngIf="f.model.errors.pattern">Model is invalid.</div>
+            </div>
+          </div>
+
+          <button type="submit" *ngIf="showAdd" class="btn btn-primary" (click)="onSubmit()">Add</button>
+          <button type="submit" *ngIf="showUpdate" class="btn btn-warning" (click)="onUpdate()">Update</button>
+          <button type="button" id="cancel" class="btn btn-secondary ml-2" data-dismiss="modal">Close</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" style="max-width:350px; max-height:1000px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="font-style: italic;">Update Vehicle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="vehicleForm" (ngSubmit)="onUpdate()">
+
+                <div class="form-group">
+                  <label for="inputPassword4" style="font-size: 14px;">Plate No :</label>
+                  <input type="text" class="form-control" id="vehicleNumber" formControlName="plateNumber">
+                  <div *ngIf="submitted && f.plateNumber.errors" class="text-danger" style="font-size: 14px;">
+                    <div *ngIf="f.plateNumber.errors.required">Plate number is required.</div>
+                    <div *ngIf="f.plateNumber.errors.pattern">Plate number is invalid.</div>
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="inputAddress" style="font-size: 14px;">Owner Name :</label>
+                  <input type="text" class="form-control" id="ownerName" formControlName="ownerName">
+                  <div *ngIf="submitted && f.ownerName.errors" class="text-danger" style="font-size: 14px;">
+                    <div *ngIf="f.ownerName.errors.required">Owner name is required.</div>
+                    <div *ngIf="f.ownerName.errors.pattern">Owner name is invalid</div>
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="inputState" style="font-size: 14px;">Vehicle Type :</label>
+                  <select id="inputState" class="form-control" formControlName="vehicleType">
+                    <option selected></option>
+                    <option>Two Wheeler</option>
+                    <option>Three Wheeler</option>
+                    <option>Four Wheeler</option>
+                  </select>
+                  <div *ngIf="submitted && f.vehicleType.errors" class="text-danger" style="font-size: 14px;">
+                    <div *ngIf="f.vehicleType.errors.required">Vehicle type is required.</div>
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="inputCity" style="font-size: 14px;">Color :</label>
+                  <input type="text" class="form-control" id="color" formControlName="color">
+                  <div *ngIf="submitted && f.color.errors" class="text-danger" style="font-size: 14px;">
+                    <div *ngIf="f.color.errors.required">Color is required.</div>
+                    <div *ngIf="f.color.errors.pattern">Color is invalid.</div>
+                  </div>
+                </div>
+      
+                <div class="form-group">
+                  <label for="inputZip" style="font-size: 14px;">Model :</label>
+                  <input type="text" class="form-control" id="model" formControlName="model">
+                  <div *ngIf="submitted && f.model.errors" class="text-danger" style="font-size: 14px;">
+                    <div *ngIf="f.model.errors.required">Model is required.</div>
+                    <div *ngIf="f.model.errors.pattern">Model is invalid.</div>
+                  </div>
+                </div>
+      
+                <button type="submit"  class="btn btn-primary">Update</button>
+                <button type="button" id="cancel" class="btn btn-secondary ml-2" data-dismiss="modal">Close</button>
+                  
+              </form>
+            </div>
+        </div>
+    </div>
+</div> -->

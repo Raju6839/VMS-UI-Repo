@@ -1,0 +1,58 @@
+<div class="col-12">
+    <div class="row pt-0">
+        <div class="col-12 headingPart d-flex justify-space-between align-items-center justify-content-end">
+            <input class="form-control col-3 mr-3" type="text" style="font-family:Arial, FontAwesome"
+                placeholder="&#xf002; Search on driver name  " (input)="onInputClearText(txt)" #txt />
+            <button type="submit" (click)="onSearch(txt)" [disabled]="txt.value ==''"  class="btn btn-info mr-3">
+                Search
+            </button>
+        </div>
+    </div>
+    <div class="col-12">
+        <table class="table table-wrapper-scroll-y my-custom-scrollbar dataTableStyle mt-3 mb-3">
+            <thead class="thead-dark">
+                <tr>
+                    <th>License Number</th>
+                    <th>First Name</th>
+                    <th>last Name</th>
+                    <th>Contact Number</th>
+                </tr>
+                <!-- style="width: 151px" style="width: 129px"style="width: 129px"style="width: 94px" -->
+            </thead>
+            <tbody class="tableBoday">
+                <tr *ngFor="
+                  let tableData of drivers  | paginate: config;
+                  let i = index" [class.active]="i== currentSelectedPage" (click)="setActive(i)">
+
+                    <td><a class="tableRowlink" (click)="onSetInputValue(tableData.licenseNumber)">{{
+                            tableData.licenseNumber}} </a></td>
+                    <td>{{ tableData.firstname }}</td>
+                    <td>{{ tableData.lastname }}</td>
+                    <td>{{ tableData.phoneNumber}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12 d-flex justify-content-around justify-space-between">
+        <div class="row w-100">
+            <!-- <div class="col-3">
+                <label for="items" class="text-right mr-2">Records per page:</label>
+                <select class="paginationDropDown" (click)="dropDownRecords($event.target.value)">
+                    <option value="5" [selected]=true>5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                    <option value="25">25</option>
+                </select>
+            </div> -->
+            <div class="col-7 d-flex justify-content-center">
+                <pagination-controls id="licenseSearchPaginator" previousLabel="Prev" nextLabel="Next"
+                    (pageChange)="pageChanged($event)">
+                </pagination-controls>
+            </div>
+            <div class="col-2">
+                <label class="justify-content-end" for="items">Total records: {{totalRecords}}</label>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+
+<div class="container mt-3 justify-content-center align-item-center d-flex" >
+    <div style="width: 350px; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);">
+        <form [formGroup]="driverForm" (ngSubmit)="onSubmit()" class="wrapper" style="background-color: #555454a2;">
+            <h4 for="fname" style="font-size: 20px;" class="text-center text-white">Add Driver</h4>
+            <hr>
+            
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputPassword4" class="text-white">First name :</label>
+                    <input type="text" class="form-control" id="firstname" formControlName="firstname">
+                    <div *ngIf="submitted && f.firstname.errors" class="text-danger" style="font-size: 14px;">
+                        <div *ngIf="f.firstname.errors.required">First name is required.</div>
+                        <div *ngIf="f.firstname.errors.pattern">First name is invalid.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputAddress" class="text-white">Last name :</label>
+                    <input type="text" class="form-control" id="lastname" formControlName="lastname">
+                    <div *ngIf="submitted && f.lastname.errors" class="text-danger" style="font-size: 14px;">
+                        <div *ngIf="f.lastname.errors.required">Last name is required.</div>
+                        <div *ngIf="f.lastname.errors.pattern">Last name is invalid.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputCity" class="text-white">License no :</label>
+                    <input type="text" class="form-control" id="licenseNumber" formControlName="licenseNumber">
+                    <div *ngIf="submitted && f.licenseNumber.errors" class="text-danger" style="font-size: 14px;">
+                        <div *ngIf="f.licenseNumber.errors.required">License number is required.</div>
+                        <div *ngIf="f.licenseNumber.errors.pattern">License number is invalid.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputZip" class="text-white">Phone no :</label>
+                    <input type="number" class="form-control" id="phoneNumber" formControlName="phoneNumber">
+                    <div *ngIf="submitted && f.phoneNumber.errors" class="text-danger" style="font-size: 14px;">
+                        <div *ngIf="f.phoneNumber.errors.required">Phone number is required.</div>
+                        <div *ngIf="f.phoneNumber.errors.pattern">Phone number is invalid.</div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit"  class="btn btn-primary"
+                style="width: 100%; font-size: 14px;" routerLinkActive="router-link-active" >Add</button>
+            <!-- <button type="button"  class="btn btn-primary ml-2"
+                style="width: 49%; font-size: 14px;" [routerLink]="['/driver-list']" routerLinkActive="router-link-active"  >Back</button> -->
+        </form>
+    </div>
+</div>

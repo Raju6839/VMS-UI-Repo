@@ -1,0 +1,35 @@
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
+    <div class="sidenav-content"> 
+        <a routerLink="/vehicle-master" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{ exact: true }" (click)="closeNav()">Vehicle Master</a>
+        <!-- <a class="p-0" style="font-size: 20px" id="masterPages">
+          <ul id="accordion1" class="accordion">
+            <li>
+              <a class="link p-0"> Masters<i class="fa fa-chevron-down"></i> </a>
+              <ul class="submenu p-0" id="dropDowm">
+                <li>
+                  
+                </li> -->
+                <!-- <li> -->
+                  <a routerLink="/driver-master" routerLinkActive="active-link"
+                    [routerLinkActiveOptions]="{ exact: true }" (click)="closeNav()">Driver Master</a>
+                <!-- </li> -->
+                <!-- <li>
+                  <a routerLink="/rfid-master" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+                    (click)="closeNav()">RFID Tag Master</a>
+                </li>  -->
+              <!-- </ul>
+            </li>
+          </ul>
+          </a> -->
+
+          <a routerLink="/dashboard" id = "dashboardPage" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeNav()">Dashboard</a>
+          <a routerLink="/report" id = "dashboardPage" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+          (click)="closeNav()">Report</a>
+    </div>
+  </div>
+  <!--  <app-sidebar></app-sidebar> -->
+  
+  <span id="openNav" style="font-size: 30px; cursor: pointer" (click)="openNav()" class="nav">&#9776;</span>

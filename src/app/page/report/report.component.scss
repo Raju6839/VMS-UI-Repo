@@ -1,0 +1,71 @@
+.wrap {
+    margin-left: 150px;
+    margin-right: 150px;
+    // overflow: hidden;
+}
+
+.table th {
+    color: #fff;
+    background-color: #343a40;
+    border-color: #454d55;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon{
+    position: absolute;
+    top: 7px;
+    right: -12px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #aaa !important;
+  }
+
+form {
+    font-size: 7px;
+}
+
+.table-bordered, .table-bordered td, .table-bordered th {
+    border: 1px solid #595a5c;
+}
+
+.paginator{
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+}
+
+.paginator .ngx-pagination .current {
+    background: rgb(131, 131, 131);
+    border-radius: 4px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.paginator .ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: #d4d4d4;
+    border-radius: 3px;
+    padding-left: 9px;
+    padding-right: 9px;
+    text-decoration: none;
+}
+
+.paginator .ngx-pagination a:focus, .ngx-pagination button:focus {
+    outline: none;
+    background: #d4d4d4;
+}
+
+.modal .modal-dialog {
+    max-width: 920px;
+}
+
+.fa-trash{
+    color: #f10b22be;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+

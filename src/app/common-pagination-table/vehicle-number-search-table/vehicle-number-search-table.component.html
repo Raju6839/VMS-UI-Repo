@@ -1,0 +1,55 @@
+<div class="col-12 headingPart d-flex justify-space-between align-items-center justify-content-end">
+  <input class="form-control col-3 mr-3" type="text" style="font-family:Arial, FontAwesome"
+    placeholder="&#xf002; Search on owner name" name="txt" (input)="onInputClearText(txt)" #txt />
+  <button class="btn btn-info mr-3" (click)="onSearch(txt)" [disabled]="txt.value ==''">
+    Search
+  </button>
+
+</div>
+<div class="col-12">
+  <table class="table table-wrapper-scroll-y my-custom-scrollbar dataTableStyle mt-3 mb-3">
+    <thead class="thead-dark">
+      <tr>
+        <th>Vehicle Number</th>
+        <th>Owner Name</th>
+        <th>Vehicle Type</th>
+        <th>Color</th>
+        <th>Model</th>
+      </tr>
+    </thead>
+    <tbody class="tableBoday">
+      <tr *ngFor="
+            let tableData of vehicles | paginate: config;
+            let i = index" [class.active]="i== currentSelectedPage" (click)="setActive(i)">
+        <td><a class="tableRowlink" (click)="onSetInputValue(tableData.plateNumber)">{{ tableData.plateNumber}}</a></td>
+
+        <td>{{ tableData.ownerName}}</td>
+        <td>{{ tableData.vehicleType}}</td>
+        <td>{{ tableData.color}}</td>
+        <td>{{ tableData.model}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="col-12 d-flex justify-content-around justify-space-between">
+  <div class="row w-100">
+    <!-- <div class="col-3">
+      <label for="items" class="text-right mr-2">Records per page:</label>
+      <select class= "paginationDropDown" (change)="dropDownRecords($event.target.value)">
+      <option value="5" [selected] = true>5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+      <option value="25">25</option>
+      </select>  
+    </div> -->
+    <div class="col-7 d-flex justify-content-center">
+      <pagination-controls id="truckNumberPaginator" previousLabel="Prev" nextLabel="Next"
+        (pageChange)="pageChanged($event)">
+      </pagination-controls>
+    </div>
+    <div class="col-2">
+      <label class="justify-content-end" for="items">Total records: {{totalRecords}}</label>
+    </div>
+  </div>
+</div>

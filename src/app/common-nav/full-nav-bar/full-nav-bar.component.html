@@ -1,0 +1,67 @@
+<!-- <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
+    <div class="container-fluid">
+      <div class="navbar-header d-flex">
+        <app-side-bar></app-side-bar>
+        <div class="d-flex align-items-center navBarStyle">
+        </div>
+        <app-nav-bar></app-nav-bar>
+      </div>
+    </div>
+  </header> -->
+
+
+<!-- <div id="wrapper">
+    
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <a href="#" class="btn" id="menu-toggle"><span class="glyphicon glyphicon-menu-hamburger">&#9776;</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<header>
+  <app-nav-bar></app-nav-bar>
+  <div id="wrapper">
+    <div class="overlay">
+    </div>
+    <nav class="navbar navbar-inverse fixed-top" id="sidebar-wrapper" role="navigation">
+      <ul class="nav sidebar-nav">
+        <div class="sidebar-header">
+          <div class="sidebar-brand">
+            <h5 class="text-white" style="font-style: italic;">Vehicle Management</h5>
+          </div>
+        </div>
+        <!-- <a href="#works" class="dropdown-toggle"  data-toggle="dropdown">Master <span class="caret"></span></a> -->
+        <li><a routerLink="/vehicle-master" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">Vehicle Master</a></li>
+        <li><a routerLink="/driver-master" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">Driver Master</a></li>
+        <li><a routerLink="/vehicle-driver-mapping" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">Vehicle Driver Mapping </a></li>
+        <li><a routerLink="/dashboard" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">Dashboard</a></li>
+        <li><a routerLink="/report" routerLinkActive="active-link"
+            [routerLinkActiveOptions]="{ exact: true }">Report</a></li>
+      </ul>
+    </nav>
+    <div id="page-content-wrapper">
+      <button type="button" class="hamburger animated fadeInLeft is-closed" data-toggle="offcanvas">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+      </button>
+    </div>
+  </div>
+</header>

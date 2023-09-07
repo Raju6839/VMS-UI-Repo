@@ -1,0 +1,119 @@
+
+<div class="mt-4 wrap" style="background-color: #4a4848a2;">
+    <div class="panel panel-primary" style= "padding: 20px; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);">
+      <div class="panel-heading">
+        <h4 style="font-style: italic;" class="text-center text-white">Vehicle Master List</h4>
+        <hr>
+      </div>
+  
+      <div class="form-group form-inline">
+        <button type="button" class="btn btn-primary"> Search</button>
+        <input type="text" class="form-control ml-2" style="width: 200px;" [(ngModel)]="searchText">
+      </div>
+      <div class="panel-body main">
+        <table class="table">
+          <thead class="text-white">
+            <tr>
+              <th>Sr No.</th>
+              <th>Plate No.</th>
+              <th>Owner Name</th>
+              <th>Vehicle Type</th>
+              <th>Color</th>
+              <th>Model</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody class="text-white">
+            <tr *ngFor="let vehicle of vehicles | filter:searchText | paginate: {itemsPerPage: 4, currentPage: page, totalItems: totalLength}">
+              <td>{{vehicle.id}}
+              <td>{{vehicle.plateNumber}}</td>
+              <td>{{vehicle.ownerName}}</td>
+              <td>{{vehicle.vehicleType}}</td>
+              <td>{{vehicle.color}}</td>
+              <td>{{vehicle.model}}</td>
+              <td><button class="btn btn-secondary" [routerLink]="['/vehicle-update', vehicle.id]"  type="submit">Edit</button>
+                <button class="btn btn-info btn-danger" 
+                  style="margin-left: 10px" type="button" (click)="deleteVehicle(vehicle.id)">Delete</button>
+                  <!-- <button class="btn btn-secondary" (click)="goToBookDetails()">Edit</button> -->
+              </td>
+            </tr>
+          </tbody>
+          <button class="btn btn-warning mt-2" type="submit" [routerLink]="['/add-vehicle']" routerLinkActive="router-link-active">Add Vehicle</button>
+        </table>
+            <pagination-controls class="text-center my-pagination" (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="wrap">
+    <div class="container mt-3 justify-content-center align-item-center d-flex">
+        <div style="width: 350px; box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);">
+            <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()" class="wrapper" style="background-color: #555454a2;">
+                <h4 for="fname" style="font-size: 20px;" class="text-center text-white">Add Vehicle</h4>
+                <hr>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputPassword4" class="text-white">Plate No :</label>
+                        <input type="text" class="form-control" id="vehicleNumber" formControlName="plateNumber">
+                        <div *ngIf="submitted && f.plateNumber.errors" class="text-danger" style="font-size: 14px;">
+                            <div *ngIf="f.plateNumber.errors.required">Plate number is required.</div>
+                            <div *ngIf="f.plateNumber.errors.pattern">Plate number is invalid.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputAddress" class="text-white">Owner Name :</label>
+                        <input type="text" class="form-control" id="ownerName" formControlName="ownerName">
+                        <div *ngIf="submitted && f.ownerName.errors" class="text-danger" style="font-size: 14px;">
+                            <div *ngIf="f.ownerName.errors.required">Owner name is required.</div>
+                            <div *ngIf="f.ownerName.errors.pattern">Owner name is invalid</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="inputState" class="text-white">Vehicle Type :</label>
+                        <select id="inputState" class="form-control" formControlName="vehicleType">
+                            <option selected></option>
+                            <option>Two Wheeler</option>
+                            <option>Three Wheeler</option>
+                            <option>Four Wheeler</option>
+                        </select>
+                        <div *ngIf="submitted && f.vehicleType.errors" class="text-danger" style="font-size: 14px;">
+                            <div *ngIf="f.vehicleType.errors.required">Vehicle type is required.</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCity" class="text-white">Color :</label>
+                        <input type="text" class="form-control" id="color" formControlName="color">
+                        <div *ngIf="submitted && f.color.errors" class="text-danger" style="font-size: 14px;">
+                            <div *ngIf="f.color.errors.required">Color is required.</div>
+                            <div *ngIf="f.color.errors.pattern">Color is invalid.</div>
+                        </div>
+                    </div>
+    
+                
+                    <div class="form-group col-md-6">
+                        <label for="inputZip" class="text-white">Model :</label>
+                        <input type="text" class="form-control" id="model" formControlName="model">
+                        <div *ngIf="submitted && f.model.errors" class="text-danger" style="font-size: 14px;">
+                            <div *ngIf="f.model.errors.required">Model is required.</div>
+                            <div *ngIf="f.model.errors.pattern">Model is invalid.</div>
+                        </div>
+                    </div>
+                </div>
+    
+                <button type="submit"  class="btn btn-primary"
+                    style="width: 100%; font-size: 14px;">Add</button>
+            </form>
+        </div>
+    </div>
+    </div> -->
